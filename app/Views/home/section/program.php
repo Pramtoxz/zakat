@@ -35,10 +35,17 @@
                             <h3 class="text-xl font-bold text-gray-900 mb-3"><?= $program['namaprogram'] ?></h3>
                             <p class="text-gray-600 mb-6 line-clamp-3"><?= substr($program['deskripsi'], 0, 120) ?>...</p>
                             
-                            <button class="w-full bg-gradient-to-r from-primary to-primary-dark text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
-                                <i class="fas fa-info-circle mr-2"></i>
-                                Lihat Detail
-                            </button>
+                            <div class="flex space-x-2">
+                                <button class="flex-1 bg-gradient-to-r from-primary to-primary-dark text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
+                                    <i class="fas fa-info-circle mr-2"></i>
+                                    Detail
+                                </button>
+                                <a href="<?= base_url('dashboard/donatur/donasi/form/' . $program['idprogram']) ?>" 
+                                   class="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 text-center">
+                                    <i class="fas fa-heart mr-2"></i>
+                                    Donasi
+                                </a>
+                            </div>
                         </div>
                     </div>
                 <?php endforeach; ?>

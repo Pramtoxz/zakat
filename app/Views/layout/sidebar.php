@@ -282,8 +282,8 @@
                     </li>
                 <?php endif; ?>
 
-                <!-- Menu untuk Pimpinan: Bisa melihat seluruh laporan -->
-                <?php if(session()->get('role') == 'pimpinan'): ?>
+                <!-- Menu untuk ketua: Bisa melihat seluruh laporan -->
+                <?php if(session()->get('role') == 'ketua'): ?>
                     <li class="nav-header">Laporan</li>
                     <li class="nav-item">
                         <a href="<?= base_url('/laporan/zakat') ?>" class="nav-link <?= (current_url() == base_url('/laporan/zakat')) ? 'active' : '' ?>">

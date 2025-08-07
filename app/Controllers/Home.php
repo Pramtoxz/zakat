@@ -38,4 +38,9 @@ class Home extends BaseController
 
         return view('home/index', $data);
     }
+
+    public function kalkulatorZakat()
+    {
+        return view('kalkulator_zakat_public');
+    }
 }

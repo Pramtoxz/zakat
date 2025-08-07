@@ -8,6 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 
 // Landing page routes
 $routes->get('/', 'Home::index');
+$routes->get('kalkulator-zakat', 'Home::kalkulatorZakat');
 
 // Auth Routes
 $routes->get('auth', 'Auth::index');
@@ -34,6 +35,60 @@ $routes->get('profile/complete/donatur', 'ProfileController::completeProfileDona
 $routes->get('profile/complete/mustahik', 'ProfileController::completeProfileMustahik');
 $routes->post('profile/save/donatur', 'ProfileController::saveProfileDonatur');
 $routes->post('profile/save/mustahik', 'ProfileController::saveProfileMustahik');
+
+// Dashboard Routes for Donatur
+$routes->group('dashboard/donatur', ['filter' => ['auth', 'role:donatur']], function ($routes) {
+    $routes->get('/', 'DashboardDonaturController::index');
+    $routes->get('edit-profile', 'DashboardDonaturController::editProfile');
+    $routes->post('update-profile', 'DashboardDonaturController::updateProfile');
+    
+    // Donasi routes for donatur
+    $routes->get('donasi', 'DashboardDonaturController::donasi');
+    $routes->get('donasi/view', 'DashboardDonaturController::viewDonasi');
+    $routes->get('donasi/form', 'DashboardDonaturController::formDonasi');
+    $routes->get('donasi/form/(:segment)', 'DashboardDonaturController::formDonasi/$1'); // For program selection from home
+    $routes->post('donasi/save', 'DashboardDonaturController::saveDonasi');
+    $routes->get('donasi/detail/(:segment)', 'DashboardDonaturController::detailDonasi/$1');
+    $routes->post('donasi/upload-bukti', 'DashboardDonaturController::uploadBuktiDonasi');
+    
+                    // Zakat routes for donatur
+                $routes->get('zakat', 'DashboardDonaturController::zakat');
+                $routes->get('zakat/view', 'DashboardDonaturController::viewZakat');
+                $routes->get('zakat/form', 'DashboardDonaturController::formZakat');
+                $routes->get('zakat/kalkulator', 'DashboardDonaturController::kalkulatorZakat');
+                $routes->post('zakat/save', 'DashboardDonaturController::saveZakat');
+                $routes->get('zakat/detail/(:segment)', 'DashboardDonaturController::detailZakat/$1');
+                $routes->post('zakat/upload-bukti', 'DashboardDonaturController::uploadBuktiZakat');
+});
+
+// Dashboard Routes for Mustahik
+$routes->group('dashboard/mustahik', ['filter' => ['auth', 'role:mustahik']], function ($routes) {
+    $routes->get('/', 'DashboardMustahikController::index');
+    $routes->get('edit-profile', 'DashboardMustahikController::editProfile');
+    $routes->post('update-profile', 'DashboardMustahikController::updateProfile');
+    
+    // Permohonan routes for mustahik
+    $routes->get('permohonan', 'DashboardMustahikController::permohonan');
+    $routes->post('permohonan/view', 'DashboardMustahikController::viewPermohonan');
+    $routes->get('permohonan/form', 'DashboardMustahikController::formtambahPermohonan');
+    $routes->post('permohonan/save', 'DashboardMustahikController::savePermohonan');
+    $routes->get('permohonan/edit/(:segment)', 'DashboardMustahikController::formeditPermohonan/$1');
+    $routes->post('permohonan/update/(:segment)', 'DashboardMustahikController::updatePermohonan/$1');
+    $routes->post('permohonan/delete', 'DashboardMustahikController::deletePermohonan');
+    $routes->get('permohonan/detail/(:segment)', 'DashboardMustahikController::detailPermohonan/$1');
+    $routes->post('permohonan/syarat', 'DashboardMustahikController::getSyaratByKategori');
+});
+
+// General Routes (accessible for logged in users)
+$routes->get('profile/edit', function() {
+    $role = session()->get('role');
+    if ($role === 'donatur') {
+        return redirect()->to(site_url('dashboard/donatur/edit-profile'));
+    } elseif ($role === 'mustahik') {
+        return redirect()->to(site_url('dashboard/mustahik/edit-profile'));
+    }
+    return redirect()->to(site_url('auth'));
+});
 
 
 
@@ -82,7 +137,7 @@ $routes->group('user', ['filter' => ['auth', 'role:admin']], function ($routes) 
     $routes->post('delete', 'UserController::delete');
 });
 
-$routes->group('laporan-users', ['filter' => ['auth', 'role:admin']], function ($routes) {
+$routes->group('laporan-users', ['filter' => ['auth', 'role:admin,ketua']], function ($routes) {
     $routes->get('mustahik', 'Laporan\LaporanUsers::LaporanMustahik');
     $routes->get('mustahik/view', 'Laporan\LaporanUsers::viewallLaporanMustahik');
     $routes->get('donatur', 'Laporan\LaporanUsers::LaporanDonatur');
