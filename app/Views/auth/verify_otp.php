@@ -108,6 +108,7 @@
             <!-- OTP Verification Card -->
             <div class="glass-effect rounded-2xl shadow-2xl p-8">
                 <form action="<?= site_url($action) ?>" method="POST" class="space-y-8">
+
                     <!-- Hidden fields -->
                     <input type="hidden" name="email" value="<?= $email ?>">
                     
@@ -235,12 +236,12 @@
                     $(`.otp-input[data-index="${index + 1}"]`).focus();
                 }
                 
-                // Auto submit when all fields are filled
+                // Enable submit button when all fields are filled
                 const allFilled = $('.otp-input').toArray().every(input => $(input).val() !== '');
                 if (allFilled) {
-                    setTimeout(() => {
-                        $('form').submit();
-                    }, 500);
+                    $('#verify-btn').prop('disabled', false).removeClass('opacity-50 cursor-not-allowed');
+                } else {
+                    $('#verify-btn').prop('disabled', true).addClass('opacity-50 cursor-not-allowed');
                 }
             });
 

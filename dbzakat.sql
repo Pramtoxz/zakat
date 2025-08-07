@@ -122,9 +122,13 @@ CREATE TABLE `otp_codes` (
   PRIMARY KEY (`id`),
   KEY `idx_email` (`email`),
   KEY `idx_otp_code` (`otp_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `otp_codes` */
+
+insert  into `otp_codes`(`id`,`email`,`otp_code`,`type`,`is_used`,`expires_at`,`created_at`,`updated_at`) values 
+(2,'projectalba146@gmail.com','508455','register',0,'2025-08-07 12:39:10','2025-08-07 12:29:10','2025-08-07 12:29:10'),
+(3,'asda@gmail.com','658712','register',0,'2025-08-07 12:40:54','2025-08-07 12:30:54','2025-08-07 12:30:54');
 
 /*Table structure for table `penyaluran_dana` */
 

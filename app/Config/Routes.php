@@ -28,6 +28,13 @@ $routes->post('auth/reset-password', 'Auth::resetPassword');
 // Resend OTP
 $routes->post('auth/resend-otp', 'Auth::resendOTP');
 
+// Profile Completion Routes
+$routes->get('profile/check', 'ProfileController::checkProfileCompletion');
+$routes->get('profile/complete/donatur', 'ProfileController::completeProfileDonatur');
+$routes->get('profile/complete/mustahik', 'ProfileController::completeProfileMustahik');
+$routes->post('profile/save/donatur', 'ProfileController::saveProfileDonatur');
+$routes->post('profile/save/mustahik', 'ProfileController::saveProfileMustahik');
+
 
 
 // Admin & Dokter & Pimpinan dashboard (protected by auth filter)

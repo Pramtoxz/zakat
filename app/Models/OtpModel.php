@@ -7,38 +7,49 @@ use CodeIgniter\Model;
 class OtpModel extends Model
 {
     protected $table            = 'otp_codes';
-    protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
-    protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
-    protected $allowedFields    = ['email', 'otp_code', 'type', 'is_used', 'expires_at'];
+    protected $primaryKey        = 'id';
+    protected $useAutoIncrement  = true;
+    protected $returnType        = 'array';
+    protected $useSoftDeletes    = false;
+    protected $protectFields     = true;
+    protected $allowedFields     = ['email', 'otp_code', 'type', 'is_used', 'expires_at'];
 
     // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
+    protected $deletedField  = 'deleted_at';
+
+    // Validation
+    protected $validationRules      = [];
+    protected $validationMessages   = [];
+    protected $skipValidation       = false;
+    protected $cleanValidationRules = true;
+
+    // Callbacks
+    protected $allowCallbacks = true;
+    protected $beforeInsert   = [];
+    protected $afterInsert    = [];
+    protected $beforeUpdate   = [];
+    protected $afterUpdate    = [];
+    protected $beforeFind     = [];
+    protected $afterFind      = [];
+    protected $beforeDelete   = [];
+    protected $afterDelete    = [];
 
     /**
-     * Generate OTP untuk email tertentu dan tipe tertentu
+     * Generate OTP untuk email dan type tertentu
      *
      * @param string $email
-     * @param string $type register|forgot_password
+     * @param string $type
      * @return array
      */
     public function generateOTP(string $email, string $type): array
     {
-        // Nonaktifkan OTP lama yang belum dipakai
-        $this->where('email', $email)
-            ->where('type', $type)
-            ->where('is_used', 0)
-            ->set(['is_used' => 1])
-            ->update();
-        
-        // Generate OTP baru
-        $otpCode = $this->generateRandomOTP();
-        $expiresAt = date('Y-m-d H:i:s', strtotime('+10 minutes'));
+        // Generate 6-digit random OTP
+        $otpCode = rand(100000, 999999);
+        $expiresAt = date('Y-m-d H:i:s', strtotime('+5 minutes'));
         
         $data = [
             'email'      => $email,
@@ -96,37 +107,42 @@ class OtpModel extends Model
     {
         $now = date('Y-m-d H:i:s');
         
-        $count = $this->where('email', $email)
+        $otp = $this->where('email', $email)
             ->where('type', $type)
             ->where('is_used', 0)
             ->where('expires_at >', $now)
-            ->countAllResults();
-            
-        return $count > 0;
+            ->first();
+        
+        return $otp !== null;
     }
     
     /**
-     * Generate 6 digit OTP secara random
+     * Hapus OTP yang sudah kedaluarsa
      *
-     * @return string
+     * @return int
      */
-    private function generateRandomOTP(): string
-    {
-        return sprintf('%06d', mt_rand(0, 999999));
-    }
-    
-    /**
-     * Bersihkan OTP yang sudah kadaluarsa
-     *
-     * @return void
-     */
-    public function cleanupExpiredOTP(): void
+    public function cleanExpiredOTP(): int
     {
         $now = date('Y-m-d H:i:s');
         
-        $this->where('expires_at <', $now)
+        return $this->where('expires_at <', $now)
+            ->orWhere('is_used', 1)
+            ->delete();
+    }
+    
+    /**
+     * Batalkan semua OTP yang belum digunakan untuk email dan type tertentu
+     *
+     * @param string $email
+     * @param string $type
+     * @return bool
+     */
+    public function cancelPendingOTP(string $email, string $type): bool
+    {
+        return $this->where('email', $email)
+            ->where('type', $type)
             ->where('is_used', 0)
             ->set(['is_used' => 1])
             ->update();
     }
-} 
+}

@@ -135,7 +135,8 @@ class Auth extends BaseController
                 // Redirect berdasarkan role
                 $redirect = '';
                 if ($user['role'] == 'mustahik' || $user['role'] == 'donatur') {
-                    $redirect = site_url('/'); // welcome_message
+                    // Untuk mustahik dan donatur, cek dulu apakah profile sudah lengkap
+                    $redirect = site_url('profile/check');
                 } else if (in_array($user['role'], ['admin', 'program', 'keuangan','ketua'])) {
                     $redirect = site_url('dashboard'); // dashboard
                 } else {
@@ -251,10 +252,11 @@ class Auth extends BaseController
             'password' => $this->request->getPost('password')
         ];
         session()->set('register_data', $formData);
+
         
         // Generate OTP dan kirim email
         $otp = $this->otpModel->generateOTP($email, 'register');
-        $this->emailService->sendOTP($email, $otp['otp_code'], 'register');
+        $emailSent = $this->emailService->sendOTP($email, $otp['otp_code'], 'register');
         
         // Redirect ke halaman verifikasi OTP
         return view('auth/verify_otp', [
@@ -273,10 +275,11 @@ class Auth extends BaseController
         $otpCode = implode('', $otpInput);
         
         // Verifikasi OTP
-        if ($this->otpModel->verifyOTP($email, $otpCode, 'register')) {
+        $otpValid = $this->otpModel->verifyOTP($email, $otpCode, 'register');
+        
+        if ($otpValid) {
             // Ambil data registrasi dari session
             $formData = session()->get('register_data');
-            
             if (!$formData) {
                 return redirect()->to(site_url('auth/register'))
                     ->with('error', 'Sesi pendaftaran telah kedaluarsa. Silakan daftar kembali.');
@@ -298,8 +301,14 @@ class Auth extends BaseController
                 return redirect()->to(site_url('auth'))
                     ->with('message', 'Pendaftaran berhasil! Silakan login dengan akun yang telah Anda buat.');
             } else {
-                return redirect()->to(site_url('auth/register'))
-                    ->with('error', 'Gagal membuat akun. Silakan coba lagi.');
+                $errors = $this->userModel->errors();
+                
+                return view('auth/verify_otp', [
+                    'email' => $email,
+                    'type' => 'register', 
+                    'action' => 'auth/verify-register-otp',
+                    'error' => 'Gagal membuat akun: ' . implode(', ', $errors)
+                ]);
             }
         } else {
             return view('auth/verify_otp', [
