@@ -206,7 +206,7 @@ class ZakatController extends BaseController
         // Ambil data program untuk jenis zakat berdasarkan idkategori = 2
         $db = db_connect();
         $programs = $db->table('program')
-                    ->select('idprogram, namaprogram, idkategori')
+                    ->select('idprogram, namaprogram, kategori.namakategori')
                     ->join('kategori', 'kategori.idkategori = program.idkategori', 'left')
                     ->where('program.idkategori', 2)
                     ->get()

@@ -86,8 +86,14 @@
 
         <!-- Footer -->
         <div class="row">
-            <div class="col-8"></div>
-            <div class="col-4 text-right">
+            <div class="col-4 text-left">
+                <p style="margin: 10px 0; font-size: 12px;">Diterima Oleh :</p>
+                <p style="margin: 5px 0; font-weight: bold;">Nama Penerima</p>
+                <br>
+                <br>
+                <p style="margin: 5px 0; font-weight: bold;">TTD</p>
+            </div>
+            <div class="col-8 text-right">
                 <p style="margin: 10px 0; font-size: 12px;">Disalurkan Oleh :</p>
                 <p style="margin: 5px 0; font-weight: bold;">Ketua Lembaga MPZ</p>
                 <br>
@@ -198,10 +204,15 @@
 
         <!-- Footer -->
         <div class="row">
-            <div class="col-8"></div>
-            <div class="col-4 text-right">
+            <div class="col-4 text-left">
+                <p style="margin: 10px 0; font-size: 12px;">Diterima Oleh :</p>
+                <p style="margin: 5px 0; font-weight: bold;">Nama Penerima</p>
+                <br>
+                <br>
+                <p style="margin: 5px 0; font-weight: bold;">TTD</p>
+            </div>
+            <div class="col-8 text-right">
                 <p style="margin: 10px 0; font-size: 12px;">Disalurkan Oleh :</p>
-                
                 <p style="margin: 5px 0; font-weight: bold;">Ketua Lembaga MPZ</p>
                 <br>
                 <br>
