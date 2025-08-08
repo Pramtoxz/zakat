@@ -190,7 +190,7 @@
                     <i class="fas fa-bolt mr-2"></i>Menu Cepat
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <a href="<?= base_url('dashboard/mustahik/permohonan/formtambah') ?>" class="group relative rounded-lg p-6 bg-gradient-to-br from-green-50 to-green-100 hover:from-green-100 hover:to-green-200 transition duration-200">
+                    <a href="<?= base_url('dashboard/mustahik/permohonan') ?>" class="group relative rounded-lg p-6 bg-gradient-to-br from-green-50 to-green-100 hover:from-green-100 hover:to-green-200 transition duration-200">
                         <div>
                             <span class="rounded-lg inline-flex p-3 bg-green-600 text-white">
                                 <i class="fas fa-hand-holding-heart text-xl"></i>

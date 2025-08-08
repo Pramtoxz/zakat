@@ -188,7 +188,6 @@ class DonasiController extends BaseController
             return redirect()->to('/donasi')->with('error', 'Data Donasi tidak ditemukan');
         }
 
-        // Ambil data program untuk donasi berdasarkan idkategori != 2 (selain zakat)
         $db = db_connect();
         $programs = $db->table('program')
                     ->select('idprogram, namaprogram, kategori.idkategori')
