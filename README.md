@@ -62,16 +62,15 @@ Sistem manajemen zakat digital untuk **Lembaga Mitra Pengelola Zakat (MPZ) Alumn
 - **Dashboard**: AdminLTE 3.x
 
 ### Dependencies
-- **QR Code**: endroid/qr-code ^5.0
-- **DataTables**: hermawan/codeigniter4-datatables ^0.8.0
+- **DataTables**: hermawan/codeigniter4-datatables
 - **Testing**: PHPUnit ^10.5.16
 
 ## 🚀 Instalasi
 
 ### Requirements
-- PHP 8.1+
+- PHP 8.2+
 - MySQL 5.7+
-- Web Server (Apache/Nginx)
+- Laragon
 - Composer
 
 ### Quick Start
@@ -164,4 +163,4 @@ MIT License - lihat file `LICENSE` untuk detail.
 
 - **Website**: https://portfolio-pramudito.vercel.app/
 - **Email**: pramuditometra@gmail.com
-
+Copyright (c) 2025 Pramudito Metra
