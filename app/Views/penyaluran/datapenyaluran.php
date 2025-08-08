@@ -137,35 +137,39 @@ $(document).on('click', '.btn-edit', function() {
     var id = $(this).data('id');
     window.location.href = "<?php echo site_url('penyaluran/formedit/'); ?>" + id;
 });
-
 $(document).on('click', '.btn-detail', function() {
     var id = $(this).data('id');
-    console.log('Detail button clicked for ID:', id);
-    
-    $.ajax({
-        type: "GET",
-        url: "<?= site_url('penyaluran/detail/') ?>" + id,
-        dataType: 'html',
-        beforeSend: function() {
-            console.log('Loading detail for ID:', id);
-            $('#detail-content').html('<div class="text-center"><i class="fas fa-spinner fa-spin"></i> Memuat...</div>');
-        },
-        success: function(response) {
-            console.log('Detail loaded successfully');
-            $('#detail-content').html(response);
-            $('#detailModal').modal('show');
-        },
-        error: function(xhr, status, error) {
-            console.error('Error loading detail:', xhr.responseText);
-            $('#detail-content').html('<div class="alert alert-danger">Gagal memuat detail penyaluran</div>');
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Gagal memuat detail penyaluran: ' + error
-            });
-        }
-    });
+    window.location.href = "<?php echo site_url('penyaluran/detail/'); ?>" + id;
 });
+
+// $(document).on('click', '.btn-detail', function() {
+//     var id = $(this).data('id');
+//     console.log('Detail button clicked for ID:', id);
+    
+//     $.ajax({
+//         type: "GET",
+//         url: "<?= site_url('penyaluran/detail/') ?>" + id,
+//         dataType: 'html',
+//         beforeSend: function() {
+//             console.log('Loading detail for ID:', id);
+//             $('#detail-content').html('<div class="text-center"><i class="fas fa-spinner fa-spin"></i> Memuat...</div>');
+//         },
+//         success: function(response) {
+//             console.log('Detail loaded successfully');
+//             $('#detail-content').html(response);
+//             $('#detailModal').modal('show');
+//         },
+//         error: function(xhr, status, error) {
+//             console.error('Error loading detail:', xhr.responseText);
+//             $('#detail-content').html('<div class="alert alert-danger">Gagal memuat detail penyaluran</div>');
+//             Swal.fire({
+//                 icon: 'error',
+//                 title: 'Error',
+//                 text: 'Gagal memuat detail penyaluran: ' + error
+//             });
+//         }
+//     });
+// });
 
 // Modal akan ditutup otomatis oleh Bootstrap
 // Tidak perlu custom close function

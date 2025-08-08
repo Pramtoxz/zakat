@@ -119,13 +119,13 @@
 
     $(document).on('click', '.btnLogout', function() {
         Swal.fire({
-            title: "Apakah anda yakin ingin keluar?",
+            title: "Akhiri Sesi Pada Apps MPZ Alumni FK Unand?",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Ya",
-            cancelButtonText: "Tidak"
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Akhiri",
+            cancelButtonText: "Batal"
         }).then((result) => {
             if (result.isConfirmed) {
                 setTimeout(function() {

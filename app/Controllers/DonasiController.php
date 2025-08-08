@@ -191,7 +191,7 @@ class DonasiController extends BaseController
         // Ambil data program untuk donasi berdasarkan idkategori != 2 (selain zakat)
         $db = db_connect();
         $programs = $db->table('program')
-                    ->select('idprogram, namaprogram, idkategori')
+                    ->select('idprogram, namaprogram, kategori.idkategori')
                     ->join('kategori', 'kategori.idkategori = program.idkategori', 'left')
                     ->where('program.idkategori !=', 2)
                     ->get()

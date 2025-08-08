@@ -35,62 +35,6 @@
     </div>
 </div>
 
-<!-- Modal Detail -->
-<div class="modal fade" id="detailModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Detail Zakat</h4>
-                <button type="button" class="close" data-dismiss="modal">
-                    <span>&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <strong>ID Zakat:</strong>
-                        <p id="detail-idzakat"></p>
-                    </div>
-                    <div class="col-md-6">
-                        <strong>Donatur:</strong>
-                        <p id="detail-donatur"></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <strong>Nominal:</strong>
-                        <p id="detail-nominal"></p>
-                    </div>
-                    <div class="col-md-6">
-                        <strong>Kategori Asnaf:</strong>
-                        <p id="detail-kategoriasnaf"></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <strong>Tanggal Transfer:</strong>
-                        <p id="detail-tgltransfer"></p>
-                    </div>
-                    <div class="col-md-6">
-                        <strong>Status:</strong>
-                        <p id="detail-status"></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <strong>Online:</strong>
-                        <p id="detail-online"></p>
-                    </div>
-                    <div class="col-md-6">
-                        <strong>Bukti Bayar:</strong>
-                        <p id="detail-bukti"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Modal Verifikasi Bukti Bayar -->
 <div class="modal fade" id="verifyModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
