@@ -151,16 +151,41 @@ composer test
 vendor/bin/phpunit tests/unit/HealthTest.php
 ```
 
-## 📄 License
+## 📄 License & Copyright
 
-MIT License - lihat file `LICENSE` untuk detail.
+**MIT License** - lihat file `LICENSE` untuk detail lengkap.
 
-## Pengembang
+### ⚠️ IMPORTANT COPYRIGHT NOTICE
+- **Original Author**: Pramudito Metra
+- **Original Repository**: https://github.com/pramuditometra/zakat-mpz
+- **Copyright**: © 2025 Pramudito Metra. All Rights Reserved.
+
+**ATTRIBUTION REQUIRED**: Jika Anda menggunakan, memodifikasi, atau mendistribusikan software ini, Anda WAJIB:
+1. Menyertakan copyright notice ini
+2. Mencantumkan link ke repository asli
+3. Memberikan kredit kepada author asli
+4. Menyertakan file LICENSE
+
+### 🚫 Dilarang
+- Menghapus copyright notice
+- Mengklaim sebagai karya sendiri
+- Mendistribusikan tanpa attribution
+- Penggunaan komersial tanpa izin
+
+## 👨‍💻 Pengembang
 
 **PRAMUDITO METRA**
+- 🌐 **Portfolio**: https://portfolio-pramudito.vercel.app/
+- 📧 **Email**: pramuditometra@gmail.com
+- 💼 **GitHub**: https://github.com/pramuditometra
+- 🎓 **Expertise**: Full-Stack Developer, System Architect
 
-## 📞 Kontak
+## 📞 Kontak & Support
 
-- **Website**: https://portfolio-pramudito.vercel.app/
-- **Email**: pramuditometra@gmail.com
-Copyright (c) 2025 Pramudito Metra
+- **Technical Support**: pramuditometra@gmail.com
+- **Bug Reports**: [GitHub Issues](https://github.com/pramuditometra/zakat-mpz/issues)
+- **Feature Requests**: [GitHub Discussions](https://github.com/pramuditometra/zakat-mpz/discussions)
+
+---
+
+**© 2025 Pramudito Metra - Sistem Manajemen Zakat MPZ Alumni FK Unand Padang**

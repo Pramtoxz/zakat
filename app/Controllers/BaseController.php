@@ -1,5 +1,18 @@
 <?php
 
+/**
+ * Sistem Manajemen Zakat - MPZ Alumni FK Unand Padang
+ * 
+ * @copyright   Copyright (c) 2025 Pramudito Metra
+ * @author      Pramudito Metra <pramuditometra@gmail.com>
+ * @portfolio   https://portfolio-pramudito.vercel.app/
+ * @repository  https://github.com/pramuditometra/zakat-mpz
+ * @license     MIT License
+ * 
+ * NOTICE: This software contains proprietary and confidential information.
+ * Unauthorized use, reproduction, or distribution is strictly prohibited.
+ */
+
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
