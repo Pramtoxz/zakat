@@ -52,9 +52,9 @@ class ProgramController extends BaseController
             ->add('action', function ($row) {
                 $button1 = '<button type="button" class="btn btn-info btn-sm btn-detail" data-idprogram="' . $row->idprogram . '" style="margin-right: 5px;"><i class="fas fa-eye"></i></button>';
                 $button2 = '<button type="button" class="btn btn-secondary btn-sm btn-edit" data-idprogram="' . $row->idprogram . '" style="margin-right: 5px;"><i class="fas fa-pencil-alt"></i></button>';
-                $button3 = '<button type="button" class="btn btn-danger btn-sm btn-delete" data-idprogram="' . $row->idprogram . '"><i class="fas fa-trash"></i></button>';
-                $button4 = '<button type="button" class="btn btn-warning btn-sm btn-status" data-idprogram="' . $row->idprogram . '" data-status="' . $row->status . '"><i class="fas fa-check"></i></button>';
-                $buttonsGroup = '<div style="display: flex;">' . $button1 . $button2 . $button3 . '</div>';
+                $button3 = '<button type="button" class="btn btn-warning btn-sm btn-status" data-idprogram="' . $row->idprogram . '" style="margin-right: 5px;"><i class="fas fa-sync"></i></button>';
+                $button4 = '<button type="button" class="btn btn-danger btn-sm btn-delete" data-idprogram="' . $row->idprogram . '"><i class="fas fa-trash"></i></button>';
+                $buttonsGroup = '<div style="display: flex;">' . $button1 . $button2 . $button3 . $button4 . '</div>';
                 return $buttonsGroup;
             }, 'last')
             ->addNumbering()
@@ -347,26 +347,22 @@ class ProgramController extends BaseController
         return view('program/detail', $data);
     }
 
-    public function updateStatus()
+ 
+
+    public function status($idprogram)
     {
-        if ($this->request->isAJAX()) {
-            $idprogram = $this->request->getPost('idprogram');
-            $status = $this->request->getPost('status');
+        $model = new ModelProgram();
+        $program = $model->find($idprogram);
 
-            $model = new ModelProgram();
-            $program = $model->find($idprogram);
-
-            if (!$program) {
-                return $this->response->setJSON([
-                    'error' => 'Data program tidak ditemukan'
-                ]);
-            }
-
-            $model->update($idprogram, ['status' => $status]);
-
-            return $this->response->setJSON([
-                'sukses' => 'Status program berhasil diubah menjadi ' . $status
-            ]);
+        if (!$program) {
+            return redirect()->back()->with('error', 'Data program tidak ditemukan');
         }
+
+        // Toggle status: jika 'biasa' jadi 'urgent', jika 'urgent' jadi 'biasa'
+        $newStatus = ($program['status'] == 'biasa') ? 'urgent' : 'biasa';
+
+        $model->update($idprogram, ['status' => $newStatus]);
+
+        return redirect()->back()->with('success', 'Status program berhasil diubah menjadi ' . ucfirst($newStatus));
     }
 }

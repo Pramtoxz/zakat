@@ -38,7 +38,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 900px;">
         <div class="modal-content" style="background-color: #f8f9fa; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
             <div class="modal-header"
-                style="background-color: #20C997; color: white; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                style="background-color: #28a745; color: white; border-top-left-radius: 15px; border-top-right-radius: 15px;">
                 <h5 class="modal-title" id="detailModalLabel">
                     <i class="fas fa-id-card mr-2"></i> Detail Donatur
                 </h5>

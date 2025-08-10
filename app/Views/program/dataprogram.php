@@ -116,5 +116,28 @@ $(document).on('click', '.btn-detail', function() {
     var idprogram = $(this).data('idprogram');
     window.location.href = "<?php echo site_url('program/detail/'); ?>" + idprogram;
 });
+
+$(document).on('click', '.btn-status', function() {
+    var idprogram = $(this).data('idprogram');
+    Swal.fire({
+        title: 'Ubah Status Program',
+        text: "Apakah Anda yakin ingin mengubah status program ini?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, ubah!',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "<?php echo site_url('program/status/'); ?>" + idprogram;
+            Swal.fire({
+                title: 'Sukses!',
+                text: 'Status berhasil di ubah',
+                icon: 'success'
+            });
+        }
+    });
+});
 </script>
 <?= $this->endSection() ?>

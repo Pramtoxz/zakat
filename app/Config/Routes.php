@@ -203,6 +203,7 @@ $routes->group('program', ['filter' => ['auth', 'role:program']], function ($rou
     $routes->get('detail/(:segment)', 'ProgramController::detail/$1');
     $routes->post('delete', 'ProgramController::delete');
     $routes->post('updateStatus', 'ProgramController::updateStatus');
+    $routes->get('status/(:segment)', 'ProgramController::status/$1');
 });
 
 $routes->group('penyaluran', ['filter' => ['auth', 'role:keuangan']], function ($routes) {
