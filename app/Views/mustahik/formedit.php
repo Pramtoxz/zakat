@@ -74,7 +74,7 @@
     </div>
     <!-- Card Preview -->
     <div class="col-md-4">
-        <div class="card bg-teal" style="padding-left: 10px; padding-right: 10px; height: 362px;">
+        <div class="card bg-success" style="padding-left: 10px; padding-right: 10px; height: 362px;">
             <div class="card-header ">
                 <h3 class="card-title">Foto Mustahik</h3>
             </div>

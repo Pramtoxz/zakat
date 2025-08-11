@@ -9,7 +9,7 @@
     </div>
     <div class="col-md-8">
         <div class="card shadow-lg h-100">
-            <div class="card-header bg-teal text-white">
+            <div class="card-header bg-success text-white" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
                 <h5 class="mb-0"><i class="fas fa-user-circle mr-2"></i> Detail Mustahik</h5>
             </div>
             <div class="card-body">
