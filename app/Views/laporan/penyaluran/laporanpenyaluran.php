@@ -124,7 +124,7 @@
                     </div>
                     <div>
                         <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px; margin-left: -150px;">
-                            <img src="<?= base_url() ?>/assets/img/zakat.png" alt="Logo Klinik Promedico" style="height: 100px;">
+                            <img src="<?= base_url() ?>/assets/img/zakat.png" alt="Logo" style="height: 100px;">
                             <div style="text-align: center; margin-left: 60px;">
                                 <p style="font-size: 28px; font-family: 'Times New Roman'; margin-bottom: 0;"><b>Lembaga Mitra Pengelola Zakat (MPZ) Alumni FK Unand Padang</b></p>
                                 <p style="font-size: 20px; font-family: 'Times New Roman'; margin-bottom: 0;">Kota Padang, Sumatera Barat</p>

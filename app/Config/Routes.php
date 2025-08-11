@@ -91,8 +91,6 @@ $routes->get('profile/edit', function() {
 });
 
 
-
-// Admin & Dokter & Pimpinan dashboard (protected by auth filter)
 $routes->group('dashboard', ['filter' => ['auth', 'role:admin,ketua,program,keuangan']], function ($routes) {
     $routes->get('/', 'Dashboard::index');
 });
