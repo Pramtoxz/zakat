@@ -128,14 +128,10 @@ class ProfileController extends BaseController
         }
 
         // Generate ID donatur dengan format DN0001
-        $lastDonatur = $this->donaturModel->orderBy('id_donatur', 'DESC')->first();
-        if ($lastDonatur) {
-            $lastNumber = (int)substr($lastDonatur['id_donatur'], 2); // Ambil angka setelah "DN"
-            $newNumber = $lastNumber + 1;
-            $newId = 'DN' . str_pad($newNumber, 4, '0', STR_PAD_LEFT);
-        } else {
-            $newId = 'DN0001';
-        }
+        $db = db_connect();
+        $query = $db->query("SELECT CONCAT('DN', LPAD(IFNULL(MAX(SUBSTRING(id_donatur, 3)) + 1, 1), 4, '0')) AS next_number FROM donatur");
+        $row = $query->getRow();
+        $newId = $row->next_number;
 
         $data = [
             'id_donatur' => $newId,
@@ -191,15 +187,11 @@ class ProfileController extends BaseController
             ]);
         }
 
-        // Generate ID mustahik dengan format M0001  
-        $lastMustahik = $this->mustahikModel->orderBy('id_mustahik', 'DESC')->first();
-        if ($lastMustahik) {
-            $lastNumber = (int)substr($lastMustahik['id_mustahik'], 1); // Ambil angka setelah "M"
-            $newNumber = $lastNumber + 1;
-            $newId = 'M' . str_pad($newNumber, 4, '0', STR_PAD_LEFT);
-        } else {
-            $newId = 'M0001';
-        }
+        // Generate ID mustahik dengan format MS0001
+        $db = db_connect();
+        $query = $db->query("SELECT CONCAT('MS', LPAD(IFNULL(MAX(SUBSTRING(id_mustahik, 3)) + 1, 1), 4, '0')) AS next_number FROM mustahik");
+        $row = $query->getRow();
+        $newId = $row->next_number;
 
         $data = [
             'id_mustahik' => $newId,
