@@ -43,4 +43,24 @@ class Home extends BaseController
     {
         return view('kalkulator_zakat_public');
     }
+
+    public function programs()
+    {
+        $db = db_connect();
+        
+        // Ambil semua program dengan join kategori
+        $programs = $db->table('program p')
+                      ->select('p.*, k.namakategori')
+                      ->join('kategori k', 'k.idkategori = p.idkategori', 'left')
+                      ->orderBy('p.status', 'DESC')
+                      ->orderBy('p.tglmulai', 'ASC')
+                      ->get()
+                      ->getResultArray();
+        
+        $data = [
+            'programs' => $programs
+        ];
+
+        return view('home/programs', $data);
+    }
 }

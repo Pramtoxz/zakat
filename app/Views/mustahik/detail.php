@@ -2,7 +2,7 @@
     <div class="col-md-4">
         <div class="card shadow-lg h-100">
             <div class="card-body p-0 d-flex justify-content-center align-items-center" style="overflow: hidden; border-radius: 10px;">
-                <img src="<?= base_url() ?>/assets/img/mustahik/<?= $mustahik['foto'] ?>" alt="Gambar mustahik"
+                <img src="<?= !empty($mustahik['foto']) ? base_url('assets/img/mustahik/' . $mustahik['foto']) : base_url('assets/img/defaultuser.png') ?>" alt="Gambar mustahik"
                     style="width: 100%; height: 100%; object-fit: cover;">
             </div>
         </div>

@@ -41,9 +41,40 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
+        
+        /* Memastikan konten bisa scroll */
+        body {
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+        }
+        
+        /* Responsive untuk layar kecil */
+        @media (max-height: 800px) {
+            .min-h-screen {
+                min-height: auto !important;
+                padding-top: 2rem !important;
+                padding-bottom: 2rem !important;
+            }
+        }
+        
+        @media (max-height: 600px) {
+            .min-h-screen {
+                min-height: auto !important;
+                padding-top: 1rem !important;
+                padding-bottom: 1rem !important;
+            }
+            
+            .mb-8 {
+                margin-bottom: 1rem !important;
+            }
+            
+            .space-y-6 > * + * {
+                margin-top: 1rem !important;
+            }
+        }
     </style>
 </head>
-<body class="min-h-screen hero-gradient relative overflow-hidden">
+<body class="min-h-screen hero-gradient relative">
     <!-- Background decorations -->
     <div class="absolute inset-0 overflow-hidden">
         <div class="absolute top-20 left-20 w-32 h-32 bg-white/10 rounded-full animate-float"></div>
@@ -63,8 +94,8 @@
     </div>
 
     <!-- Main Container -->
-    <div class="min-h-screen flex items-center justify-center p-4 relative z-10">
-        <div class="w-full max-w-md animate-fadeInUp">
+    <div class="min-h-screen flex items-start justify-center p-4 relative z-10 py-8 pb-16">
+        <div class="w-full max-w-md animate-fadeInUp my-8">
             <!-- Brand Header -->
             <div class="text-center mb-8">
                 <div class="inline-flex items-center space-x-3 mb-4">

@@ -295,25 +295,33 @@ class PenyaluranController extends BaseController
     public function delete()
     {
         if ($this->request->isAJAX()) {
-            $idprogram = $this->request->getPost('idprogram');
+            $id = $this->request->getPost('id');
 
-            $model = new ModelProgram();
-            $program = $model->find($idprogram);
+            $model = new \App\Models\Penyaluran();
+            $penyaluran = $model->find($id);
             
-            if ($program) {
+            if ($penyaluran) {
                 // Hapus foto jika ada
-                if (!empty($program['foto']) && file_exists('assets/img/program/' . $program['foto'])) {
-                    unlink('assets/img/program/' . $program['foto']);
+                if (!empty($penyaluran['foto']) && file_exists('uploads/penyaluran/' . $penyaluran['foto'])) {
+                    unlink('uploads/penyaluran/' . $penyaluran['foto']);
                 }
                 
-                $model->where('idprogram', $idprogram)->delete();
+                // Jika penyaluran adalah zakat, kembalikan status permohonan ke 'diterima'
+                if ($penyaluran['jenisdana'] === 'zakat' && !empty($penyaluran['idpermohonan'])) {
+                    $db = db_connect();
+                    $db->table('permohonan')
+                       ->where('idpermohonan', $penyaluran['idpermohonan'])
+                       ->update(['status' => 'diterima']);
+                }
+                
+                $model->where('id', $id)->delete();
                 
                 $json = [
-                    'sukses' => 'Data program berhasil dihapus'
+                    'sukses' => 'Data penyaluran berhasil dihapus' . ($penyaluran['jenisdana'] === 'zakat' ? ' dan status permohonan dikembalikan ke diterima' : '')
                 ];
             } else {
                 $json = [
-                    'error' => 'Data program tidak ditemukan'
+                    'error' => 'Data penyaluran tidak ditemukan'
                 ];
             }
             

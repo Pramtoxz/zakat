@@ -23,7 +23,7 @@
         <?php else: ?>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <?php foreach ($programUrgent as $program): ?>
-                    <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden">
+                    <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden" data-program-id="<?= $program['idprogram'] ?>">
                         <div class="relative">
                             <img src="<?= base_url('assets/img/program/' . $program['foto']) ?>" 
                                  alt="<?= $program['namaprogram'] ?>" 
@@ -55,10 +55,17 @@
                                 </div>
                             </div>
                             
-                            <button class="w-full bg-gradient-to-r from-red-500 to-red-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
-                                <i class="fas fa-hand-holding-heart mr-2"></i>
-                                Bantu Sekarang
-                            </button>
+                            <div class="flex space-x-2">
+                                <button type="button" class="btn-detail flex-1 bg-gradient-to-r from-primary to-primary-dark text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300" data-id="<?= $program['idprogram'] ?>">
+                                    <i class="fas fa-info-circle mr-2"></i>
+                                    Detail
+                                </button>
+                                <a href="<?= base_url('dashboard/donatur/donasi/form/' . $program['idprogram']) ?>" 
+                                   class="flex-1 bg-gradient-to-r from-red-500 to-red-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 text-center">
+                                    <i class="fas fa-hand-holding-heart mr-2"></i>
+                                    Bantu
+                                </a>
+                            </div>
                         </div>
                     </div>
                 <?php endforeach; ?>

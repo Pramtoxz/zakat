@@ -9,6 +9,7 @@ use CodeIgniter\Router\RouteCollection;
 // Landing page routes
 $routes->get('/', 'Home::index');
 $routes->get('kalkulator-zakat', 'Home::kalkulatorZakat');
+$routes->get('programs', 'Home::programs');
 
 // Auth Routes
 $routes->get('auth', 'Auth::index');
@@ -28,6 +29,9 @@ $routes->post('auth/reset-password', 'Auth::resetPassword');
 
 // Resend OTP
 $routes->post('auth/resend-otp', 'Auth::resendOTP');
+
+// Change Password
+$routes->post('auth/change-password', 'Auth::changePassword');
 
 // Profile Completion Routes
 $routes->get('profile/check', 'ProfileController::checkProfileCompletion');

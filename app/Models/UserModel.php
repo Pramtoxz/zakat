@@ -60,13 +60,6 @@ class UserModel extends Model
                     'is_unique' => 'Email sudah digunakan'
                 ]
             ],
-            'password' => [
-                'rules' => 'required|min_length[6]',
-                'errors' => [
-                    'required' => 'Password harus diisi untuk user baru',
-                    'min_length' => 'Password minimal 6 karakter'
-                ]
-            ],
             'role' => [
                 'rules' => 'required|in_list[admin,ketua,program,keuangan,mustahik,donatur]',
                 'errors' => [

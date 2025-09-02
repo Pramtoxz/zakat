@@ -107,14 +107,6 @@ class MustahikController extends BaseController
                         'required' => '{field} tidak boleh kosong',
                     ]
                 ],
-                'cover' => [
-                    'label' => 'Foto',
-                    'rules' => 'mime_in[cover,image/jpg,image/jpeg,image/gif,image/png]|max_size[cover,4096]', 
-                    'errors' => [
-                        'mime_in' => 'File harus berformat jpg, jpeg, atau png',
-                        'max_size' => 'Ukuran file maksimal adalah 4MB'
-                    ]
-                ],
 
             ];
 
@@ -128,29 +120,38 @@ class MustahikController extends BaseController
                     'error' => $errors
                 ];
             } else {
+                $modelMustahik = new ModelMustahik();
+                $fotoName = null;
+                
                 if ($foto->isValid() && !$foto->hasMoved()) {
+                    // User uploaded a photo
                     $newName = 'foto-' . date('Ymd') . '-' . $id_mustahik . '.' . $foto->getClientExtension();
                     $foto->move('assets/img/mustahik/', $newName);
-
-                    $modelMustahik = new ModelMustahik();
-                    $modelMustahik->insert([
-                        'id_mustahik' => $id_mustahik,
-                        'nama' => $nama,
-                        'alamat' => $alamat,
-                        'nohp' => $nohp,
-                        'jenkel' => $jenkel,
-                        'tgllahir' => $tgllahir,
-                        'foto' => $newName,
-                    ]);
-
-                    $json = [
-                        'sukses' => 'Berhasil Simpan Data'
-                    ];
+                    $fotoName = $newName;
                 } else {
-                    $json = [
-                        'error' => ['foto' => $foto->getErrorString() . '(' . $foto->getError() . ')']
-                    ];
+                    // No photo uploaded, use default image
+                    $defaultSource = 'assets/img/defaultuser.png';
+                    $defaultDestination = 'assets/img/mustahik/foto-' . date('Ymd') . '-' . $id_mustahik . '.png';
+                    
+                    if (file_exists($defaultSource)) {
+                        copy($defaultSource, $defaultDestination);
+                        $fotoName = 'foto-' . date('Ymd') . '-' . $id_mustahik . '.png';
+                    }
                 }
+
+                $modelMustahik->insert([
+                    'id_mustahik' => $id_mustahik,
+                    'nama' => $nama,
+                    'alamat' => $alamat,
+                    'nohp' => $nohp,
+                    'jenkel' => $jenkel,
+                    'tgllahir' => $tgllahir,
+                    'foto' => $fotoName,
+                ]);
+
+                $json = [
+                    'sukses' => 'Berhasil Simpan Data'
+                ];
             }
             echo json_encode($json);
         }

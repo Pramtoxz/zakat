@@ -59,24 +59,6 @@
                     
                     <hr class="my-4">
                     
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h5>Ubah Status Program</h5>
-                            <div class="form-group row">
-                                <div class="col-md-6">
-                                    <select class="form-control" id="statusProgram">
-                                        <option value="tersedia" <?= $program['status'] == 'tersedia' ? 'selected' : '' ?>>Tersedia</option>
-                                        <option value="selesai" <?= $program['status'] == 'selesai' ? 'selected' : '' ?>>Selesai</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <button type="button" class="btn btn-warning" id="btnUpdateStatus">
-                                        <i class="fas fa-sync-alt mr-1"></i> Update Status
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     
                     <div class="row mt-4">
                         <div class="col-md-12">

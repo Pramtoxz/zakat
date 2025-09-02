@@ -21,8 +21,8 @@
                 
                 <?php if (session()->get('logged_in')): ?>
                     <!-- User Dropdown -->
-                    <div class="relative" x-data="{ open: false }">
-                        <button @click="open = !open" class="flex items-center space-x-2 text-gray-700 hover:text-primary transition-colors">
+                    <div class="relative" id="userDropdown">
+                        <button id="dropdownToggle" class="flex items-center space-x-2 text-gray-700 hover:text-primary transition-colors">
                             <div class="w-8 h-8 bg-gradient-to-br from-primary to-primary-dark rounded-full flex items-center justify-center">
                                 <i class="fas fa-user text-white text-sm"></i>
                             </div>
@@ -31,8 +31,7 @@
                         </button>
                         
                         <!-- Dropdown Menu -->
-                        <div x-show="open" @click.away="open = false" x-transition
-                            class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2">
+                        <div id="dropdownMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 hidden">
                             <div class="px-4 py-2 border-b border-gray-100">
                                 <p class="text-sm text-gray-600">Sebagai</p>
                                 <p class="text-sm font-medium text-gray-900 capitalize"><?= session()->get('role') ?></p>

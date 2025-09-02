@@ -81,13 +81,13 @@
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" id="cover" name="cover" accept="image/*"
                         onchange="previewCover()">
-                    <label class="custom-file-label" for="cover">Pilih File</label>
+                    <label class="custom-file-label" for="cover">Pilih File (Opsional)</label>
                     <div class="invalid-feedback error_cover"></div>
                 </div>
             </div>
             <div class="card-body" style="overflow: hidden;">
-                <img id="coverPreview" src="#" alt="Preview Cover" class="img-fluid"
-                    style="max-width: 100%; max-height: 100%; display: none;">
+                <img id="coverPreview" src="<?= base_url('assets/img/defaultuser.png') ?>" alt="Preview Cover" class="img-fluid"
+                    style="max-width: 100%; max-height: 100%;">
             </div>
         </div>
         <div class="card"
@@ -174,13 +174,6 @@ $(function() {
                         $('.error_tgllahir').html('');
                     }
 
-                    if (err.error_cover) {
-                        $('#cover').addClass('is-invalid').removeClass('is-valid');
-                        $('.error_cover').html(err.error_cover);
-                    } else {
-                        $('#cover').removeClass('is-invalid').addClass('is-valid');
-                        $('.error_cover').html('');
-                    }
                 }
 
                 if (response.sukses) {
@@ -211,15 +204,22 @@ function previewCover() {
     const coverPreview = document.querySelector('#coverPreview');
     const coverLabel = document.querySelector('label[for="cover"]');
 
-    coverPreview.style.display = 'block';
-    const oFReader = new FileReader();
-    oFReader.readAsDataURL(cover.files[0]);
+    if (cover.files && cover.files[0]) {
+        coverPreview.style.display = 'block';
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(cover.files[0]);
 
-    oFReader.onload = function(oFREvent) {
-        coverPreview.src = oFREvent.target.result;
-    };
+        oFReader.onload = function(oFREvent) {
+            coverPreview.src = oFREvent.target.result;
+        };
 
-    coverLabel.textContent = cover.files[0].name;
+        coverLabel.textContent = cover.files[0].name;
+    } else {
+        // Show default image when no file is selected
+        coverPreview.style.display = 'block';
+        coverPreview.src = '<?= base_url('assets/img/defaultuser.png') ?>';
+        coverLabel.textContent = 'Pilih File (Opsional)';
+    }
 }
 </script>
 <?= $this->endSection() ?>

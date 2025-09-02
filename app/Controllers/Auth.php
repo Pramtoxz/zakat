@@ -478,4 +478,87 @@ class Auth extends BaseController
             'message' => 'Invalid request'
         ]);
     }
+
+    // ============ Fungsi untuk change password ============
+
+    public function changePassword()
+    {
+        if ($this->request->isAJAX()) {
+            // Cek apakah user sudah login
+            if (!session()->get('logged_in')) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Anda harus login terlebih dahulu'
+                ]);
+            }
+
+            // Ambil data dari request
+            $input = json_decode($this->request->getBody(), true);
+            $currentPassword = $input['currentPassword'] ?? '';
+            $newPassword = $input['newPassword'] ?? '';
+
+            // Validasi input
+            if (empty($currentPassword)) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Password lama harus diisi'
+                ]);
+            }
+
+            if (empty($newPassword)) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Password baru harus diisi'
+                ]);
+            }
+
+            if (strlen($newPassword) < 6) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Password baru minimal 6 karakter'
+                ]);
+            }
+
+            if ($currentPassword === $newPassword) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Password baru harus berbeda dengan password lama'
+                ]);
+            }
+
+            // Ambil data user dari session
+            $userId = session()->get('user_id');
+            $user = $this->userModel->find($userId);
+
+            if (!$user) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'User tidak ditemukan'
+                ]);
+            }
+
+            // Verifikasi password lama
+            if (!password_verify($currentPassword, $user['password'])) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Password lama tidak sesuai'
+                ]);
+            }
+
+            // Update password baru
+            $this->userModel->update($userId, [
+                'password' => $newPassword
+            ]);
+
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Password berhasil diubah'
+            ]);
+        }
+
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Invalid request'
+        ]);
+    }
 }

@@ -128,29 +128,38 @@ class DonaturController extends BaseController
                     'error' => $errors
                 ];
             } else {
+                $modelDonatur = new ModelDonatur();
+                $fotoName = null;
+                
                 if ($foto->isValid() && !$foto->hasMoved()) {
+                    // User uploaded a photo
                     $newName = 'foto-' . date('Ymd') . '-' . $id_donatur . '.' . $foto->getClientExtension();
                     $foto->move('assets/img/donatur/', $newName);
-
-                    $modelDonatur = new ModelDonatur();
-                    $modelDonatur->insert([
-                        'id_donatur' => $id_donatur,
-                        'nama' => $nama,
-                        'alamat' => $alamat,
-                        'nohp' => $nohp,
-                        'jenkel' => $jenkel,
-                        'tgllahir' => $tgllahir,
-                        'foto' => $newName,
-                    ]);
-
-                    $json = [
-                        'sukses' => 'Berhasil Simpan Data'
-                    ];
+                    $fotoName = $newName;
                 } else {
-                    $json = [
-                        'error' => ['foto' => $foto->getErrorString() . '(' . $foto->getError() . ')']
-                    ];
+                    // No photo uploaded, use default image
+                    $defaultSource = 'assets/img/defaultuser.png';
+                    $defaultDestination = 'assets/img/donatur/foto-' . date('Ymd') . '-' . $id_donatur . '.png';
+                    
+                    if (file_exists($defaultSource)) {
+                        copy($defaultSource, $defaultDestination);
+                        $fotoName = 'foto-' . date('Ymd') . '-' . $id_donatur . '.png';
+                    }
                 }
+
+                $modelDonatur->insert([
+                    'id_donatur' => $id_donatur,
+                    'nama' => $nama,
+                    'alamat' => $alamat,
+                    'nohp' => $nohp,
+                    'jenkel' => $jenkel,
+                    'tgllahir' => $tgllahir,
+                    'foto' => $fotoName,
+                ]);
+
+                $json = [
+                    'sukses' => 'Berhasil Simpan Data'
+                ];
             }
             echo json_encode($json);
         }

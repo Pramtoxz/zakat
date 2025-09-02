@@ -19,7 +19,7 @@
         <?php else: ?>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <?php foreach ($programBiasa as $program): ?>
-                    <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-100">
+                    <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-100" data-program-id="<?= $program['idprogram'] ?>">
                         <div class="relative">
                             <img src="<?= base_url('assets/img/program/' . $program['foto']) ?>" 
                                  alt="<?= $program['namaprogram'] ?>" 
@@ -36,7 +36,7 @@
                             <p class="text-gray-600 mb-6 line-clamp-3"><?= substr($program['deskripsi'], 0, 120) ?>...</p>
                             
                             <div class="flex space-x-2">
-                                <button class="flex-1 bg-gradient-to-r from-primary to-primary-dark text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300">
+                                <button type="button" class="btn-detail flex-1 bg-gradient-to-r from-primary to-primary-dark text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300" data-id="<?= $program['idprogram'] ?>">
                                     <i class="fas fa-info-circle mr-2"></i>
                                     Detail
                                 </button>
@@ -52,7 +52,7 @@
             </div>
             
             <div class="text-center mt-12">
-                <a href="<?= base_url('auth') ?>" class="inline-flex items-center space-x-2 bg-gradient-to-r from-primary to-primary-dark text-white px-8 py-4 rounded-full font-semibold hover:shadow-lg transition-all duration-300">
+                <a href="<?= base_url('programs') ?>" class="inline-flex items-center space-x-2 bg-gradient-to-r from-primary to-primary-dark text-white px-8 py-4 rounded-full font-semibold hover:shadow-lg transition-all duration-300">
                     <i class="fas fa-plus-circle"></i>
                     <span>Lihat Semua Program</span>
                 </a>

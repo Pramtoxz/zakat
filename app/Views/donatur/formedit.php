@@ -4,27 +4,27 @@
     <div class="col-md-8">
         <div class="card card-success">
             <div class="card-header">
-                <h3 class="card-title">Tambah Data Mustahik</h3>
+                <h3 class="card-title">Tambah Data Donatur</h3>
             </div>
 
             <div class="card-body">
-                <?= form_open('mustahik/updatedata/'.$mustahik['id_mustahik'], ['id' => 'formeditmustahik', 'enctype' => 'multipart/form-data']) ?>
+                <?= form_open('donatur/updatedata/'.$donatur['id_donatur'], ['id' => 'formeditdonatur', 'enctype' => 'multipart/form-data']) ?>
                 <?= csrf_field() ?>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="id_mustahik">Kode mustahik</label>
-                            <input type="text" id="id_mustahik" name="id_mustahik" class="form-control"
-                                value="<?= $mustahik['id_mustahik'] ?>" readonly>
-                            <div class="invalid-feedback error_id_mustahik"></div>
+                            <label for="id_donatur">Kode donatur</label>
+                            <input type="text" id="id_donatur" name="id_donatur" class="form-control"
+                                value="<?= $donatur['id_donatur'] ?>" readonly>
+                            <div class="invalid-feedback error_id_donatur"></div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nama">Nama mustahik</label>
-                            <input type="text" id="nama" name="nama" class="form-control" value="<?= $mustahik['nama'] ?>" >
+                            <label for="nama">Nama donatur</label>
+                            <input type="text" id="nama" name="nama" class="form-control" value="<?= $donatur['nama'] ?>" >
                             <div class="invalid-feedback error_nama"></div>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="alamat">Alamat</label>
-                            <input type="text" id="alamat" name="alamat" class="form-control" value="<?= $mustahik['alamat'] ?>" ></input>
+                            <input type="text" id="alamat" name="alamat" class="form-control" value="<?= $donatur['alamat'] ?>" ></input>
                             <div class="invalid-feedback error_alamat"></div>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nohp">No HP</label>
-                            <input type="number" id="nohp" name="nohp" class="form-control" value="<?= $mustahik['nohp'] ?>" ></input>
+                            <input type="number" id="nohp" name="nohp" class="form-control" value="<?= $donatur['nohp'] ?>" ></input>
                             <div class="invalid-feedback error_nohp"></div>
                         </div>
                     </div>
@@ -52,8 +52,8 @@
                         <div class="form-group">
                             <label for="jenkel">Jenkel</label>
                             <select id="jenkel" name="jenkel" class="form-control">
-                                <option value="L" <?= $mustahik['jenkel'] == 'Laki-laki' ? 'selected' : '' ?>>Laki-laki</option>
-                                <option value="P" <?= $mustahik['jenkel'] == 'Perempuan' ? 'selected' : '' ?>>Perempuan</option>
+                                <option value="L" <?= $donatur['jenkel'] == 'Laki-laki' ? 'selected' : '' ?>>Laki-laki</option>
+                                <option value="P" <?= $donatur['jenkel'] == 'Perempuan' ? 'selected' : '' ?>>Perempuan</option>
                             </select>
                             <div class="invalid-feedback error_jenkel"></div>
                         </div>
@@ -64,7 +64,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="tgllahir">Tanggal Lahir</label>
-                            <input type="date" id="tgllahir" name="tgllahir" class="form-control" value="<?= $mustahik['tgllahir'] ?>" ></input>
+                            <input type="date" id="tgllahir" name="tgllahir" class="form-control" value="<?= $donatur['tgllahir'] ?>" ></input>
                             <div class="invalid-feedback error_tgllahir"></div>
                         </div>
                     </div>
@@ -76,18 +76,18 @@
     <div class="col-md-4">
         <div class="card bg-success" style="padding-left: 10px; padding-right: 10px; height: 362px;">
             <div class="card-header ">
-                <h3 class="card-title">Foto Mustahik</h3>
+                <h3 class="card-title">Foto donatur</h3>
             </div>
             <div class="form-group">
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" id="cover" name="cover" accept="image/*"
                         onchange="previewCover()">
-                    <label class="custom-file-label" for="cover"><?= !empty($mustahik['foto']) ? $mustahik['foto'] : 'Pilih foto' ?></label>
+                    <label class="custom-file-label" for="cover"><?= !empty($donatur['foto']) ? $donatur['foto'] : 'Pilih foto (Opsional)' ?></label>
                     <div class="invalid-feedback error_cover"></div>
                 </div>
             </div>
             <div class="card-body" style="overflow: hidden;">
-                  <img id="coverPreview" src="<?= !empty($mustahik['foto']) ? base_url('assets/img/mustahik/' . $mustahik['foto']) : base_url('assets/img/mustahik.png') ?>" alt="Preview Cover" class="img-fluid"
+                  <img id="coverPreview" src="<?= !empty($donatur['foto']) ? base_url('assets/img/donatur/' . $donatur['foto']) : base_url('assets/img/defaultuser.png') ?>" alt="Preview Cover" class="img-fluid"
                     style="max-width: 100%; max-height: 100%;">
             </div>
         </div>
@@ -97,7 +97,7 @@
                 <button type="submit" class="btn btn-primary" id="tombolSimpan" style="margin-right: 1rem;">
                     <i class="fas fa-save"></i> SIMPAN
                 </button>
-                <a class="btn btn-secondary" href="<?= base_url('mustahik') ?>">Kembali</a>
+                <a class="btn btn-secondary" href="<?= base_url('donatur') ?>">Kembali</a>
             </div>
         </div>
     </div>
@@ -109,7 +109,7 @@
 <?= $this->section('script') ?>
 <script>
 $(function() {
-    $('#formeditmustahik').submit(function(e) {
+    $('#formeditdonatur').submit(function(e) {
         e.preventDefault();
 
         var formData = new FormData(this); // Menggunakan FormData untuk mendukung file upload
@@ -134,12 +134,12 @@ $(function() {
                 if (response.error) {
                     let err = response.error;
 
-                    if (err.error_id_mustahik) {
-                        $('#id_mustahik').addClass('is-invalid').removeClass('is-valid');
-                        $('.error_id_mustahik').html(err.error_id_mustahik);
+                    if (err.error_id_donatur) {
+                        $('#id_donatur').addClass('is-invalid').removeClass('is-valid');
+                        $('.error_id_donatur').html(err.error_id_donatur);
                     } else {
-                        $('#id_mustahik').removeClass('is-invalid').addClass('is-valid');
-                        $('.error_id_mustahik').html('');
+                        $('#id_donatur').removeClass('is-invalid').addClass('is-valid');
+                        $('.error_id_donatur').html('');
                     }
                     if (err.error_nama) {
                         $('#nama').addClass('is-invalid').removeClass('is-valid');
@@ -193,7 +193,7 @@ $(function() {
                         timer: 1500
                     });
                     setTimeout(function() {
-                        window.location.href = '<?= site_url('mustahik') ?>';
+                        window.location.href = '<?= site_url('donatur') ?>';
                     }, 1500);
                 }
             },
@@ -212,15 +212,22 @@ function previewCover() {
     const coverPreview = document.querySelector('#coverPreview');
     const coverLabel = document.querySelector('label[for="cover"]');
 
-    coverPreview.style.display = 'block';
-    const oFReader = new FileReader();
-    oFReader.readAsDataURL(cover.files[0]);
+    if (cover.files && cover.files[0]) {
+        coverPreview.style.display = 'block';
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(cover.files[0]);
 
-    oFReader.onload = function(oFREvent) {
-        coverPreview.src = oFREvent.target.result;
-    };
+        oFReader.onload = function(oFREvent) {
+            coverPreview.src = oFREvent.target.result;
+        };
 
-    coverLabel.textContent = cover.files[0].name;
+        coverLabel.textContent = cover.files[0].name;
+    } else {
+        // Show current image or default when no file is selected
+        coverPreview.style.display = 'block';
+        coverPreview.src = '<?= !empty($donatur['foto']) ? base_url('assets/img/donatur/' . $donatur['foto']) : base_url('assets/img/defaultuser.png') ?>';
+        coverLabel.textContent = '<?= !empty($donatur['foto']) ? $donatur['foto'] : 'Pilih foto (Opsional)' ?>';
+    }
 }
 </script>
 <?= $this->endSection() ?>

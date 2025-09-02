@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lembaga Mitra Pengelola Zakat (MPZ) Alumni FK Unand Padang</title>
+    <title>Semua Program - MPZ Alumni FK Unand Padang</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
@@ -30,24 +29,118 @@
         }
     </style>
 </head>
-<body class="font-sans">
+<body class="font-sans bg-gray-50">
     <!-- Include Navigation -->
     <?= $this->include('home/section/navigation') ?>
 
-    <!-- Include Hero Section -->
-    <?= $this->include('home/section/hero') ?>
+    <!-- Header Section -->
+    <section class="py-20 bg-gradient-to-br from-primary to-primary-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Semua Program</h1>
+            <p class="text-xl text-white/90 max-w-3xl mx-auto">
+                Temukan berbagai program kebaikan yang kami jalankan untuk membantu masyarakat yang membutuhkan.
+            </p>
+        </div>
+    </section>
 
-    <!-- Include About Section -->
-    <?= $this->include('home/section/about') ?>
-
-    <!-- Include Kalkulator Section -->
-    <?= $this->include('home/section/kalkulator') ?>
-
-    <!-- Include Urgent Programs Section -->
-    <?= $this->include('home/section/urgent') ?>
-
-    <!-- Include Regular Programs Section -->
-    <?= $this->include('home/section/program') ?>
+    <!-- Programs Section -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <?php if (empty($programs)): ?>
+                <div class="text-center py-12">
+                    <div class="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-folder-open text-gray-400 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-600 mb-2">Belum Ada Program</h3>
+                    <p class="text-gray-500">Program akan segera hadir untuk membantu masyarakat.</p>
+                </div>
+            <?php else: ?>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <?php foreach ($programs as $program): ?>
+                        <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-100" data-program-id="<?= $program['idprogram'] ?>">
+                            <div class="relative">
+                                <img src="<?= base_url('assets/img/program/' . $program['foto']) ?>" 
+                                     alt="<?= $program['namaprogram'] ?>" 
+                                     class="w-full h-48 object-cover">
+                                
+                                <!-- Status Badge -->
+                                <div class="absolute top-4 left-4">
+                                    <?php if ($program['status'] == 'urgent'): ?>
+                                        <span class="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                            <i class="fas fa-exclamation-triangle mr-1"></i>Urgent
+                                        </span>
+                                    <?php else: ?>
+                                        <span class="bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">
+                                            <i class="fas fa-check-circle mr-1"></i>Biasa
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                                
+                                <!-- Category Badge -->
+                                <div class="absolute top-4 right-4">
+                                    <span class="bg-white/90 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">
+                                        <?= $program['namakategori'] ?>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-gray-900 mb-3"><?= $program['namaprogram'] ?></h3>
+                                <p class="text-gray-600 mb-4 line-clamp-3"><?= substr($program['deskripsi'], 0, 120) ?>...</p>
+                                
+                                <!-- Program Info -->
+                                <div class="space-y-2 mb-6">
+                                    <?php if ($program['tglmulai']): ?>
+                                    <div class="flex items-center text-sm text-gray-500">
+                                        <i class="fas fa-calendar-alt mr-2 text-primary"></i>
+                                        <span>Mulai: <?= date('d M Y', strtotime($program['tglmulai'])) ?></span>
+                                    </div>
+                                    <?php endif; ?>
+                                    
+                                    <?php if ($program['tglselesai']): ?>
+                                    <div class="flex items-center text-sm text-gray-500">
+                                        <i class="fas fa-calendar-check mr-2 text-primary"></i>
+                                        <span>Selesai: <?= date('d M Y', strtotime($program['tglselesai'])) ?></span>
+                                    </div>
+                                    <?php endif; ?>
+                                </div>
+                                
+                                <!-- Action Buttons -->
+                                <div class="flex space-x-2">
+                                    <button type="button" class="btn-detail flex-1 bg-gradient-to-r from-gray-500 to-gray-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300" data-id="<?= $program['idprogram'] ?>">
+                                        <i class="fas fa-info-circle mr-2"></i>
+                                        Detail
+                                    </button>
+                                    
+                                    <?php if ($program['idkategori'] != 2): // Bukan program zakat ?>
+                                    <a href="<?= base_url('dashboard/donatur/donasi/form/' . $program['idprogram']) ?>" 
+                                       class="flex-1 bg-gradient-to-r from-primary to-primary-dark text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 text-center">
+                                        <i class="fas fa-heart mr-2"></i>
+                                        Donasi
+                                    </a>
+                                    <?php else: ?>
+                                    <a href="<?= base_url('dashboard/donatur/zakat/form') ?>" 
+                                       class="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 text-center">
+                                        <i class="fas fa-mosque mr-2"></i>
+                                        Zakat
+                                    </a>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                
+                <!-- Back to Home -->
+                <div class="text-center mt-12">
+                    <a href="<?= base_url('/') ?>" class="inline-flex items-center space-x-2 bg-gradient-to-r from-gray-500 to-gray-600 text-white px-8 py-4 rounded-full font-semibold hover:shadow-lg transition-all duration-300">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Kembali ke Beranda</span>
+                    </a>
+                </div>
+            <?php endif; ?>
+        </div>
+    </section>
 
     <!-- Include Footer -->
     <?= $this->include('home/section/footer') ?>
@@ -132,14 +225,12 @@
                         const title = programCard.querySelector('h3').textContent;
                         const description = programCard.querySelector('p').textContent;
                         const image = programCard.querySelector('img').src;
-                        const statusBadge = programCard.querySelector('.absolute.top-4 span, .absolute.top-4.right-4 span');
-                        const categoryBadge = programCard.querySelector('.absolute.top-4.right-4 span, .absolute.top-4 span');
-                        
-                        // Try to get dates from the card
+                        const statusBadge = programCard.querySelector('.absolute.top-4.left-4 span');
+                        const categoryBadge = programCard.querySelector('.absolute.top-4.right-4 span');
                         const startDate = programCard.querySelector('.fa-calendar-alt')?.parentElement?.textContent?.replace('Mulai: ', '') || '-';
                         const endDate = programCard.querySelector('.fa-calendar-check')?.parentElement?.textContent?.replace('Selesai: ', '') || '-';
                         
-                        const status = statusBadge?.textContent?.includes('Urgent') ? 'urgent' : 'biasa';
+                        const status = statusBadge.textContent.includes('Urgent') ? 'urgent' : 'biasa';
                         const statusColor = status === 'urgent' ? '#ef4444' : '#28A745';
                         const statusIcon = status === 'urgent' ? 'fas fa-exclamation-triangle' : 'fas fa-check-circle';
                         
@@ -154,12 +245,12 @@
                                         <div class="flex items-center">
                                             <i class="fas fa-tag text-gray-500 mr-2"></i>
                                             <span class="font-medium">Kategori:</span>
-                                            <span class="ml-2 px-2 py-1 bg-gray-100 rounded text-sm">${categoryBadge?.textContent || 'N/A'}</span>
+                                            <span class="ml-2 px-2 py-1 bg-gray-100 rounded text-sm">${categoryBadge.textContent}</span>
                                         </div>
                                         <div class="flex items-center">
                                             <i class="${statusIcon} mr-2" style="color: ${statusColor}"></i>
                                             <span class="font-medium">Status:</span>
-                                            <span class="ml-2 px-2 py-1 rounded text-sm text-white" style="background-color: ${statusColor}">${statusBadge?.textContent || 'Biasa'}</span>
+                                            <span class="ml-2 px-2 py-1 rounded text-sm text-white" style="background-color: ${statusColor}">${statusBadge.textContent}</span>
                                         </div>
                                         <div class="flex items-center">
                                             <i class="fas fa-calendar-alt text-gray-500 mr-2"></i>
@@ -186,14 +277,6 @@
                             customClass: {
                                 popup: 'swal2-popup-custom'
                             }
-                        });
-                    } else {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: 'Data program tidak ditemukan',
-                            icon: 'error',
-                            confirmButtonText: 'OK',
-                            confirmButtonColor: '#28A745'
                         });
                     }
                 });

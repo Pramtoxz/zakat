@@ -87,10 +87,11 @@ $(document).ready(function() {
 
         Swal.fire({
             title: 'Apakah Anda yakin ingin menghapus Penyaluran ini?',
+            text: "Data yang dihapus tidak dapat dikembalikan!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
             confirmButtonText: 'Ya, hapus!',
             cancelButtonText: 'Batal'
         }).then((result) => {
@@ -107,10 +108,18 @@ $(document).ready(function() {
                             Swal.fire({
                                 title: 'Sukses!',
                                 text: response.sukses,
-                                icon: 'success'
+                                icon: 'success',
+                                timer: 2000,
+                                showConfirmButton: false
                             });
                             // Refresh DataTable
                             $('#tabelPenyaluran').DataTable().ajax.reload();
+                        } else if (response.error) {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: response.error,
+                                icon: 'error'
+                            });
                         } else {
                             Swal.fire({
                                 title: 'Error!',

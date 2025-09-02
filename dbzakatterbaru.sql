@@ -37,9 +37,6 @@ CREATE TABLE `donasi` (
 
 /*Data for the table `donasi` */
 
-insert  into `donasi`(`iddonasi`,`idprogram`,`id_donatur`,`online`,`nominal`,`buktibayar`,`tgltransfer`,`status`,`created_at`,`updated_at`,`deleted_at`) values 
-('DN0001','PR0002','DN0001',1,50000,NULL,NULL,'ditolak','2025-08-07 09:21:56','2025-08-07 11:10:29',NULL);
-
 /*Table structure for table `donatur` */
 
 DROP TABLE IF EXISTS `donatur`;
@@ -60,10 +57,6 @@ CREATE TABLE `donatur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `donatur` */
-
-insert  into `donatur`(`id_donatur`,`nama`,`alamat`,`tgllahir`,`nohp`,`jenkel`,`foto`,`iduser`,`created_at`,`updated_at`,`deleted_at`) values 
-('DN0001','Mega','aadad','2025-08-06','123123','L','foto-20250806-DN0001.jpeg',NULL,'2025-08-06 18:48:06','2025-08-06 18:48:06',NULL),
-('DN0002','Wati','dsasddf','2025-08-07','868686','P','dfd',15,NULL,NULL,NULL);
 
 /*Table structure for table `kategori` */
 
@@ -88,10 +81,10 @@ DROP TABLE IF EXISTS `migrations`;
 
 CREATE TABLE `migrations` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `version` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `class` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `group` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `namespace` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `version` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `class` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `group` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `namespace` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `time` int NOT NULL,
   `batch` int unsigned NOT NULL,
   PRIMARY KEY (`id`)
@@ -121,10 +114,6 @@ CREATE TABLE `mustahik` (
 
 /*Data for the table `mustahik` */
 
-insert  into `mustahik`(`id_mustahik`,`nama`,`alamat`,`tgllahir`,`nohp`,`jenkel`,`foto`,`iduser`,`created_at`,`updated_at`,`deleted_at`) values 
-('M0001','adadadad','fsdfsfsdfdsfjjj','2008-08-06','+62734573457345375','L',NULL,25,'2025-08-07 13:52:27','2025-08-07 13:52:27',NULL),
-('MS0001','Jokod','asdad','2025-08-06','12313','L','foto-20250806-MS0001.jpg',0,'2025-08-06 18:31:33','2025-08-06 19:31:48',NULL);
-
 /*Table structure for table `otp_codes` */
 
 DROP TABLE IF EXISTS `otp_codes`;
@@ -141,13 +130,9 @@ CREATE TABLE `otp_codes` (
   PRIMARY KEY (`id`),
   KEY `idx_email` (`email`),
   KEY `idx_otp_code` (`otp_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `otp_codes` */
-
-insert  into `otp_codes`(`id`,`email`,`otp_code`,`type`,`is_used`,`expires_at`,`created_at`,`updated_at`) values 
-(13,'adminc@gmais.com','119022','register',0,'2025-08-07 13:09:35','2025-08-07 13:04:35','2025-08-07 13:04:35'),
-(14,'cssdd@gmail.com','968278','register',1,'2025-08-07 13:10:13','2025-08-07 13:05:13','2025-08-07 13:05:35');
 
 /*Table structure for table `penyaluran_dana` */
 
@@ -165,13 +150,9 @@ CREATE TABLE `penyaluran_dana` (
   `foto` varchar(255) DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `penyaluran_dana` */
-
-insert  into `penyaluran_dana`(`id`,`id_mustahik`,`jenisdana`,`idpermohonan`,`idprogram`,`nominal`,`tglpenyaluran`,`deskripsi`,`foto`,`status`) values 
-(2,'MS0001','zakat','PM0001',NULL,50000,'2025-08-07','oke','penyaluran-20250807-1754520929.jpg',NULL),
-(3,'MS0001','donasi',NULL,'PR0004',10000,'2025-08-07','kkk','penyaluran-20250807-1754535313.jpg',NULL);
 
 /*Table structure for table `permohonan` */
 
@@ -192,11 +173,6 @@ CREATE TABLE `permohonan` (
 
 /*Data for the table `permohonan` */
 
-insert  into `permohonan`(`idpermohonan`,`id_mustahik`,`kategoriasnaf`,`jenisbantuan`,`alasan`,`dokumen`,`status`,`tglpengajuan`,`tgldisetujui`) values 
-('PM0001','MS0001','miskin','Materi','okeoke','dokumen-20250807-PM0001.pdf','selesai','2025-08-07','2025-08-07'),
-('PM0002','MS0001','Fakir','Materi','tekk','dokumen-20250807-PM0002.pdf','diproses','2025-08-07',NULL),
-('PM0003','M0001','Amil','150000','adadladladaldl','dokumen-20250807-PM0003.pdf','diterima','2025-08-09','2025-08-07');
-
 /*Table structure for table `program` */
 
 DROP TABLE IF EXISTS `program`;
@@ -214,11 +190,6 @@ CREATE TABLE `program` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `program` */
-
-insert  into `program`(`idprogram`,`namaprogram`,`idkategori`,`deskripsi`,`tglmulai`,`tglselesai`,`foto`,`status`) values 
-('PR0002','zakat emas','2','oke wan','2025-08-01','2025-08-30','program-20250807-PR0002.jpg','biasa'),
-('PR0003','zakat maal','2','asdad','2025-08-07','2025-08-30','program-20250807-PR0003.png','biasa'),
-('PR0004','Yatimin aja','1','adasd','2025-08-30','2025-08-30','program-20250807-PR0004.jpg','urgent');
 
 /*Table structure for table `syarat_bantuan` */
 
@@ -265,14 +236,15 @@ CREATE TABLE `users` (
   UNIQUE KEY `email` (`email`),
   KEY `idx_users_role` (`role`),
   KEY `idx_users_status` (`status`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `users` */
 
 insert  into `users`(`id`,`username`,`email`,`password`,`role`,`status`,`last_login`,`remember_token`,`created_at`,`updated_at`,`deleted_at`) values 
-(1,'admin','admin@example.com','$2y$10$hI1mC1S1wh2sz1NqPDgDl.I.ZM9sjbmqm4aiFI6lzzB7XgOvZgnhe','ketua','active','2025-08-07 14:10:47',NULL,'2025-06-14 21:50:56','2025-06-14 21:50:56',NULL),
-(15,'donatur','dona','$2y$10$hTMBEzCXOxii8qr.u1WON.jVvn/uwxfFt/r76Iqm4HOZuQELYPvgC','donatur','active','2025-08-07 14:15:37',NULL,NULL,NULL,NULL),
-(25,'albadc','cssdd@gmail.com','$2y$10$hTMBEzCXOxii8qr.u1WON.jVvn/uwxfFt/r76Iqm4HOZuQELYPvgC','mustahik','active','2025-08-07 13:52:15',NULL,'2025-08-07 13:05:35','2025-08-07 13:05:35',NULL);
+(1,'admin','admin@gmail.com','$2y$10$hI1mC1S1wh2sz1NqPDgDl.I.ZM9sjbmqm4aiFI6lzzB7XgOvZgnhe','admin','active','2025-09-02 10:13:55',NULL,'2025-06-14 21:50:56','2025-09-02 09:39:18',NULL),
+(2,'ketua','ketua','$2y$10$hI1mC1S1wh2sz1NqPDgDl.I.ZM9sjbmqm4aiFI6lzzB7XgOvZgnhe','ketua','active',NULL,NULL,NULL,NULL,NULL),
+(3,'keuangan','keuangan','$2y$10$hI1mC1S1wh2sz1NqPDgDl.I.ZM9sjbmqm4aiFI6lzzB7XgOvZgnhe','keuangan','active','2025-09-02 09:50:27',NULL,NULL,'2025-09-02 09:50:15',NULL),
+(4,'program','program','$2y$10$hI1mC1S1wh2sz1NqPDgDl.I.ZM9sjbmqm4aiFI6lzzB7XgOvZgnhe','program','active','2025-09-02 10:14:48',NULL,NULL,NULL,NULL);
 
 /*Table structure for table `zakat` */
 
@@ -294,9 +266,6 @@ CREATE TABLE `zakat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `zakat` */
-
-insert  into `zakat`(`idzakat`,`id_donatur`,`nominal`,`online`,`buktibayar`,`tgltransfer`,`status`,`jeniszakat`,`created_at`,`update_at`,`deleted_at`) values 
-('ZK0001','DN0001',50000,0,NULL,NULL,'diterima','PR0002','2025-08-07 08:38:42',NULL,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
