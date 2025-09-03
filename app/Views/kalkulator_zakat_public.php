@@ -27,7 +27,7 @@
                 <div class="flex items-center">
                     <a href="<?= base_url('/') ?>" class="flex items-center">
                         <img src="<?= base_url('assets/img/logo.png') ?>" alt="Logo" class="h-8 w-8 mr-3">
-                        <span class="text-xl font-bold text-gray-900">Zakat Center</span>
+                        <span class="text-xl font-bold text-gray-900">MPZ Alumni FK Unand</span>
                     </a>
                 </div>
                 <div class="flex items-center space-x-4">
@@ -344,7 +344,7 @@
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-8">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <p>&copy; 2025 Sistem Manajemen Zakat. Semua hak dilindungi.</p>
+            <p>&copy; 2025 MPZ Alumni FK Unand. Semua hak dilindungi.</p>
             <p class="text-gray-400 text-sm mt-2">Berdasarkan standar BAZNAS dan ketentuan syariah Islam</p>
         </div>
     </footer>
