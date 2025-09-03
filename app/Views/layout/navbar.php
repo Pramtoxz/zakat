@@ -186,8 +186,20 @@ function showProfileModal() {
                 <div class="row mb-3">
                     <div class="col-4"><strong>Role:</strong></div>
                     <div class="col-8">
-                        <span class="badge badge-${role === 'donatur' ? 'primary' : role === 'mustahik' ? 'success' : 'warning'}">
-                            ${roleText}
+                        <span class="badge badge-${
+                            role === 'admin' ? 'danger' :
+                            role === 'program' ? 'primary' :
+                            role === 'keuangan' ? 'info' :
+                            role === 'ketua' ? 'success' :
+                            'secondary'
+                        }">
+                            ${
+                                role === 'admin' ? 'Admin' :
+                                role === 'program' ? 'Program' :
+                                role === 'keuangan' ? 'Keuangan' :
+                                role === 'ketua' ? 'Ketua' :
+                                'User'
+                            }
                         </span>
                     </div>
                 </div>
