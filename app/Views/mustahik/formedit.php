@@ -42,7 +42,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nohp">No HP</label>
-                            <input type="number" id="nohp" name="nohp" class="form-control" value="<?= $mustahik['nohp'] ?>" ></input>
+                            <input type="text" id="nohp" name="nohp" class="form-control" value="<?= $mustahik['nohp'] ?>" placeholder="Contoh: 08123456789 atau +628123456789">
                             <div class="invalid-feedback error_nohp"></div>
                         </div>
                     </div>
@@ -52,8 +52,8 @@
                         <div class="form-group">
                             <label for="jenkel">Jenkel</label>
                             <select id="jenkel" name="jenkel" class="form-control">
-                                <option value="L" <?= $mustahik['jenkel'] == 'Laki-laki' ? 'selected' : '' ?>>Laki-laki</option>
-                                <option value="P" <?= $mustahik['jenkel'] == 'Perempuan' ? 'selected' : '' ?>>Perempuan</option>
+                                <option value="L" <?= $mustahik['jenkel'] == 'L' ? 'selected' : '' ?>>Laki-laki</option>
+                                <option value="P" <?= $mustahik['jenkel'] == 'P' ? 'selected' : '' ?>>Perempuan</option>
                             </select>
                             <div class="invalid-feedback error_jenkel"></div>
                         </div>
@@ -149,7 +149,13 @@ $(function() {
                         $('.error_nama').html('');
                     }
 
-
+                    if (err.error_alamat) {
+                        $('#alamat').addClass('is-invalid').removeClass('is-valid');
+                        $('.error_alamat').html(err.error_alamat);
+                    } else {
+                        $('#alamat').removeClass('is-invalid').addClass('is-valid');
+                        $('.error_alamat').html('');
+                    }
 
                     if (err.error_nohp) {
                         $('#nohp').addClass('is-invalid').removeClass('is-valid');

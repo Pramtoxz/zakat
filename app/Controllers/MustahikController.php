@@ -88,9 +88,10 @@ class MustahikController extends BaseController
                 ],
                 'nohp' => [
                     'label' => 'No HP',
-                    'rules' => 'required',
+                    'rules' => 'required|regex_match[/^(\+62|62|0)8[1-9][0-9]{6,10}$/]',
                     'errors' => [
                         'required' => '{field} tidak boleh kosong',
+                        'regex_match' => '{field} harus berupa nomor HP Indonesia yang valid (contoh: 08123456789 atau +628123456789)',
                     ]
                 ],
                 'jenkel' => [
@@ -225,9 +226,10 @@ class MustahikController extends BaseController
                 ],
                 'nohp' => [
                     'label' => 'No HP',
-                    'rules' => 'required',
+                    'rules' => 'required|regex_match[/^(\+62|62|0)8[1-9][0-9]{6,10}$/]',
                     'errors' => [
                         'required' => '{field} tidak boleh kosong',
+                        'regex_match' => '{field} harus berupa nomor HP Indonesia yang valid (contoh: 08123456789 atau +628123456789)',
                     ]
                 ],
                 'jenkel' => [

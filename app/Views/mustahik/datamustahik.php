@@ -22,7 +22,7 @@
                                     <th>Kode Mustahik</th>
                                     <th>Nama Mustahik</th>
                                     <th>No HP</th>
-                                    <th>Jenkel</th>
+                                    <th>Jenis Kelamin</th>
                                     <th class="no-short">Aksi</th>
                                 </tr>
                             </thead>
@@ -228,7 +228,7 @@ $('#btnSubmitCreateUser').on('click', function() {
                     title: 'Berhasil',
                     text: response.message
                 }).then(function() {
-                    $('#tabelmustahik').DataTable().ajax.reload();
+                    $('#tabelMustahik').DataTable().ajax.reload();
                 });
             } else if (response.errors) {
                 // Tampilkan pesan error validasi

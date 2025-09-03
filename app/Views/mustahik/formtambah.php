@@ -42,7 +42,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="nohp">No HP</label>
-                            <input type="number" id="nohp" name="nohp" class="form-control"></input>
+                            <input type="text" id="nohp" name="nohp" class="form-control" placeholder="Contoh: 08123456789 atau +628123456789">
                             <div class="invalid-feedback error_nohp"></div>
                         </div>
                     </div>
@@ -52,6 +52,7 @@
                         <div class="form-group">
                             <label for="jenkel">Jenkel</label>
                             <select id="jenkel" name="jenkel" class="form-control">
+                                <option value="">-- Pilih Jenis Kelamin --</option>
                                 <option value="L">Laki-laki</option>
                                 <option value="P">Perempuan</option>
                             </select>
@@ -148,7 +149,13 @@ $(function() {
                         $('.error_nama').html('');
                     }
 
-
+                    if (err.error_alamat) {
+                        $('#alamat').addClass('is-invalid').removeClass('is-valid');
+                        $('.error_alamat').html(err.error_alamat);
+                    } else {
+                        $('#alamat').removeClass('is-invalid').addClass('is-valid');
+                        $('.error_alamat').html('');
+                    }
 
                     if (err.error_nohp) {
                         $('#nohp').addClass('is-invalid').removeClass('is-valid');
