@@ -216,7 +216,6 @@ function showProfileModal() {
         width: '500px',
         showCloseButton: true,
         showCancelButton: true,
-        confirmButtonText: '<i class="fas fa-edit"></i> Edit Profil',
         cancelButtonText: '<i class="fas fa-times"></i> Tutup',
         confirmButtonColor: '#28A745',
         cancelButtonColor: '#6c757d',
