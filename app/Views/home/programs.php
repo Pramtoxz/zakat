@@ -31,7 +31,26 @@
 </head>
 <body class="font-sans bg-gray-50">
     <!-- Include Navigation -->
-    <?= $this->include('home/section/navigation') ?>
+    <nav class="bg-white shadow-sm border-b sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="<?= base_url('/') ?>" class="flex items-center">
+                        <img src="<?= base_url('assets/img/logo.png') ?>" alt="Logo" class="h-8 w-8 mr-3">
+                        <span class="text-xl font-bold text-gray-900">MPZ Alumni FK Unand</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="<?= base_url('/') ?>" class="text-gray-600 hover:text-primary transition-colors">
+                        <i class="fas fa-home mr-2"></i>Beranda
+                    </a>
+                    <a href="<?= base_url('login') ?>" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
     <!-- Header Section -->
     <section class="py-20 bg-gradient-to-br from-primary to-primary-dark">
