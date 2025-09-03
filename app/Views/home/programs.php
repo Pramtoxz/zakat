@@ -44,7 +44,7 @@
                     <a href="<?= base_url('/') ?>" class="text-gray-600 hover:text-primary transition-colors">
                         <i class="fas fa-home mr-2"></i>Beranda
                     </a>
-                    <a href="<?= base_url('login') ?>" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">
+                    <a href="<?= base_url('auth') ?>" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">
                         <i class="fas fa-sign-in-alt mr-2"></i>Login
                     </a>
                 </div>
